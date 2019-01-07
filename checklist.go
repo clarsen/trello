@@ -18,6 +18,7 @@ type Checklist struct {
 
 type CheckItem struct {
 	client      *Client
+	IDCard      string
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
 	State       string  `json:"state"`
@@ -33,6 +34,6 @@ type CheckItemState struct {
 }
 
 func (c *CheckItem) SetPos(newPos int) error {
-	path := fmt.Sprintf("checklists/%s/checkItems/%s", c.IDChecklist, c.ID)
+	path := fmt.Sprintf("cards/%s/checklist/%s/checkItem/%s", c.IDCard, c.IDChecklist, c.ID)
 	return c.client.Put(path, Arguments{"pos": fmt.Sprintf("%d", newPos)}, c)
 }

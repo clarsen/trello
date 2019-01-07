@@ -5,6 +5,8 @@
 
 package trello
 
+import "fmt"
+
 type Checklist struct {
 	ID         string      `json:"id"`
 	Name       string      `json:"name"`
@@ -15,6 +17,7 @@ type Checklist struct {
 }
 
 type CheckItem struct {
+	client      *Client
 	ID          string  `json:"id"`
 	Name        string  `json:"name"`
 	State       string  `json:"state"`
@@ -27,4 +30,9 @@ type CheckItem struct {
 type CheckItemState struct {
 	IDCheckItem string `json:"idCheckItem"`
 	State       string `json:"state"`
+}
+
+func (c *CheckItem) SetPos(newPos int) error {
+	path := fmt.Sprintf("checklists/%s/checkItems/%s", c.IDChecklist, c.ID)
+	return c.client.Put(path, Arguments{"pos": fmt.Sprintf("%d", newPos)}, c)
 }

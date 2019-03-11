@@ -115,7 +115,9 @@ func (c *Client) Put(path string, args Arguments, target interface{}) error {
 		return errors.Wrapf(err, "Invalid PUT request %s", url)
 	}
 
+	c.log("  Req %+v", req)
 	resp, err := c.client.Do(req)
+	c.log("  Resp %+v", resp)
 	if err != nil {
 		return errors.Wrapf(err, "HTTP request failure on %s", url)
 	}

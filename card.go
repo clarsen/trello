@@ -336,6 +336,12 @@ func (c *Client) GetCard(cardID string, args Arguments) (card *Card, err error) 
 	if card != nil {
 		card.client = c
 	}
+	if len(card.IDCheckLists) > 0 {
+		err = card.populateChecklists(args)
+		if err != nil {
+			return nil, err
+		}
+	}
 	return card, err
 }
 

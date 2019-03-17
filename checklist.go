@@ -37,3 +37,8 @@ func (c *CheckItem) SetPos(newPos int) error {
 	path := fmt.Sprintf("cards/%s/checklist/%s/checkItem/%s", c.IDCard, c.IDChecklist, c.ID)
 	return c.client.Put(path, Arguments{"pos": fmt.Sprintf("%d", newPos)}, c)
 }
+
+func (c *CheckItem) SetNameAndState(name string, state string) error {
+	path := fmt.Sprintf("cards/%s/checklist/%s/checkItem/%s", c.IDCard, c.IDChecklist, c.ID)
+	return c.client.Put(path, Arguments{"name": name, "state": state}, c)
+}

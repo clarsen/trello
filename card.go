@@ -410,6 +410,7 @@ func (c *Card) populateChecklists(args Arguments) (err error) {
 		for j := range c.Checklists[i].CheckItems {
 			c.Checklists[i].CheckItems[j].client = c.client
 			c.Checklists[i].CheckItems[j].IDCard = c.ID
+			c.Checklists[i].client = c.client
 		}
 	}
 	c.client.log("got checklist %+v", c.Checklists[0])

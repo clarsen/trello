@@ -8,6 +8,7 @@ package trello
 import "fmt"
 
 type Checklist struct {
+	client     *Client
 	ID         string      `json:"id"`
 	Name       string      `json:"name"`
 	IDBoard    string      `json:"idBoard,omitempty"`
@@ -41,4 +42,11 @@ func (c *CheckItem) SetPos(newPos int) error {
 func (c *CheckItem) SetNameAndState(name string, state string) error {
 	path := fmt.Sprintf("cards/%s/checklist/%s/checkItem/%s", c.IDCard, c.IDChecklist, c.ID)
 	return c.client.Put(path, Arguments{"name": name, "state": state}, c)
+}
+
+func (c *Checklist) AddCheckItem(name string) error {
+	path := fmt.Sprintf("checklists/%s/checkItems", c.ID)
+	args := Arguments{"name": name, "pos": "top", "checked": "false"}
+
+	return c.client.Post(path, args, nil)
 }

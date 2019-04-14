@@ -45,8 +45,9 @@ func (c *CheckItem) SetNameAndState(name string, state string) error {
 }
 
 func (c *Checklist) AddCheckItem(name string) error {
+	var checkitem CheckItem
 	path := fmt.Sprintf("checklists/%s/checkItems", c.ID)
 	args := Arguments{"name": name, "pos": "top", "checked": "false"}
 
-	return c.client.Post(path, args, nil)
+	return c.client.Post(path, args, &checkitem)
 }

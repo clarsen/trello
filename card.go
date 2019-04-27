@@ -413,7 +413,9 @@ func (c *Card) populateChecklists(args Arguments) (err error) {
 			c.Checklists[i].client = c.client
 		}
 	}
-	c.client.log("got checklist %+v", c.Checklists[0])
+	if c.Checklists[0] != nil {
+		c.client.log("got checklist %+v", *c.Checklists[0])
+	}
 	return
 }
 

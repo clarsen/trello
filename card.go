@@ -435,6 +435,6 @@ func EarliestCardID(cards []*Card) string {
 func (c *Card) AddChecklist(name string) error {
 	path := fmt.Sprintf("cards/%s/checklists", c.ID)
 	args := Arguments{"name": name, "pos": "top"}
-
-	return c.client.Post(path, args, nil)
+	checklist := Checklist{}
+	return c.client.Post(path, args, &checklist)
 }
